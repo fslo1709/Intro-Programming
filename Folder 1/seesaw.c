@@ -18,9 +18,9 @@ int main(void) {
 			y-=w2;
 			w1+=seesaw[i];
 			w2-=seesaw[i];
-			if (x==y) {
+			if (!(x ^ y)) {
 				for (int l=0;l<n;l++) {
-					if (l==i)
+					if (!(l ^ i))
 						printf("v");
 					else
 						printf("%d",seesaw[l]);

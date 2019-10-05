@@ -2,30 +2,34 @@
 #define MAX 16384
 int seesaw[MAX];
 int N;
+
 void chand(int min, int max) {
-	if (max-min<2)
+	if (max - min < 2) {
 		return;
-	int bal=-1;
-	long long int torque;
-	for (int i=min;i<=max;i++) {
-		long long int side1=0,side2=0;
-		for (int j=min;j<i;j++)
-			side1+=seesaw[j]*(i-j);
-		for (int j=i+1;j<=max;j++)
-			side2+=seesaw[j]*(j-i);
-		if (side1==side2) {
-			bal = i;
+	}
+	int balance = -1;
+	for (int i = min; i <= max; i++) {
+		unsigned long long int s1 = 0, s2 = 0;
+		for (int j = min; j < i; j++) {
+			s1 += seesaw[j]*(i-j);
+		}
+		for (int j = i+1; j <= max; j++) {
+			s2 += seesaw[j]*(j-i);
+		}
+		if (s1 == s2) {
+			balance = i;
 			break;
 		}
 	}
-	if (bal>-1) {
-		chand(min,bal-1);
-		printf("%d\n",bal);
-		chand(bal+1,max);
+	if (balance > -1) {
+		chand(min, balance-1);
+		printf("%d\n", balance);
+		chand(balance+1, max);
 	}
 	else
 		return;
 }
+
 int main(int argc, char const *argv[])
 {
 	scanf("%d",&N);
